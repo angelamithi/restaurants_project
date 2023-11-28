@@ -34,8 +34,7 @@ class Customer:
         for customer in cls.customers:
             if customer.full_name()==name:
                 return customer
-            else:
-                return None
+        return None
       
     
     @classmethod
@@ -63,6 +62,9 @@ class Restaurant:
 
     def reviews(self):
         return self._reviews
+    
+    def display_reviews(self):
+        return [f"Review for {self.name()} by {review.customer().full_name()} - Rating: {review.rating()}" for review in self._reviews]
 
     def customers(self):
         return [review.customer() for review in self._reviews]
@@ -85,10 +87,18 @@ class Review:
         self._customer = customer
         self._restaurant = restaurant
         self._rating = rating
+        self._restaurant.reviews().append(self)
         Review.add_rating(self)
+       
 
     def rating(self):
         return self._rating
+    
+    def customer(self):
+        return self._customer
+
+    def restaurant(self):
+        return self._restaurant
 
     @classmethod
     def add_rating(cls, rating):
@@ -98,11 +108,15 @@ class Review:
     def all_ratings(cls):
         print([rating.rating for rating in cls.reviews])
 
-    def customer(self):
-        return self._customer
+   
 
-    def restaurant(self):
-        return self._restaurant
+    @classmethod
+    def show_all_reviews(cls):
+      print([(review._customer.full_name(), review._restaurant.name(), review._rating) for review in cls.reviews])
+
+    
+     
+    
     
 customer1=Customer("Angela","Mithi")
 print(customer1.full_name())
@@ -111,8 +125,15 @@ print(customer2.full_name())
 customer3=Customer("Natalie","Jerotich")
 print(customer3.full_name())
 Customer.show_all_customers()
+print(".................................")
 restaurant1=Restaurant("Grand Regency")
 print(restaurant1.name())
 restaurant2=Restaurant("The Hilton")
 print(restaurant2.name())
-
+print("....................................")
+review1 = Review(customer1, restaurant1, 7)
+review2 = Review(customer2, restaurant2, 9)
+review3 = Review(customer3, restaurant1, 4)
+print(restaurant1.display_reviews())
+print(restaurant2.display_reviews())
+print("...............................")
