@@ -34,13 +34,13 @@ class Customer:
     def find_by_name(cls,name):
         for customer in cls.customers:
             if customer.full_name()==name:
-                return customer
+                return customer.full_name()
         return None
       
     
     @classmethod
     def find_all_by_given_name(cls, given_name):
-        matching_customers = [customer for customer in cls.customers if customer.given_name() == given_name]
+        matching_customers = [customer.full_name() for customer in cls.customers if customer.given_name() == given_name]
         return matching_customers
 
 
@@ -115,8 +115,7 @@ class Review:
     def show_all_reviews(cls):
       print([(review._customer.full_name(), review._restaurant.name(), review._rating) for review in cls.reviews])
 
-    
-     
+
     
     
 customer1=Customer("Angela","Mithi")
@@ -125,6 +124,8 @@ customer2=Customer("Natasha","Koskei")
 print(customer2.full_name())
 customer3=Customer("Natalie","Jerotich")
 print(customer3.full_name())
+customer4=Customer("Angela","Wangechi")
+print(customer4.full_name())
 Customer.show_all_customers()
 print(".................................")
 restaurant1=Restaurant("Grand Regency")
@@ -136,7 +137,7 @@ review1 = Review(customer1, restaurant1, 7)
 review2 = Review(customer2, restaurant2, 9)
 review3 = Review(customer3, restaurant1, 4)
 review4 = Review(customer1, restaurant1, 8)
-review5 = Review(customer1, restaurant2, 3)
+review5 = Review(customer1, restaurant2, 4)
 review3 = Review(customer3, restaurant1, 5)
 print(restaurant1.display_reviews())
 print(restaurant2.display_reviews())
@@ -147,11 +148,23 @@ customer3.add_review(restaurant1, 4)
 customer1.add_review(restaurant1, 8)
 
 customer1.add_review(restaurant2, 3)
-customer3.add_review(restaurant1, 5)
+customer3.add_review(restaurant1, 10)
 print(customer1.restaurants())
 print(customer2.restaurants())
 print(customer3.restaurants())
 print('.............................')
 print(f"No of reviews for customer1 ", customer1.num_reviews())
-print(f"No of reviews for customer1 ", customer2.num_reviews())
-print(f"No of reviews for customer1 ", customer3.num_reviews())
+print(f"No of reviews for customer2 ", customer2.num_reviews())
+print(f"No of reviews for customer3 ", customer3.num_reviews())
+print("..........................")
+print(f"First Full Name that matches:", Customer.find_by_name("Angela Mithi"))
+print(f"First Full Name that matches:", Customer.find_by_name("Natasha Jebet"))
+
+print(".................................")
+print(f"All customers with given name:", Customer.find_all_by_given_name("Angela"))
+
+print(".......................")
+print(f"Average Star Rating for Restaurant1", restaurant1.average_star_rating())
+print(f"Average Star Rating for Restaurant2", restaurant2.average_star_rating())
+
+
