@@ -18,7 +18,8 @@ class Customer:
         return f"{self.first_name} {self.family_name}"
     
     def restaurants(self):
-        return list(set([review.restaurant() for review in self.reviews]))
+         return list(set([review.restaurant().name() for review in self.reviews]))
+
     
     def add_review(self, restaurant, rating):
           new_review = Review(self, restaurant, rating)
@@ -134,6 +135,23 @@ print("....................................")
 review1 = Review(customer1, restaurant1, 7)
 review2 = Review(customer2, restaurant2, 9)
 review3 = Review(customer3, restaurant1, 4)
+review4 = Review(customer1, restaurant1, 8)
+review5 = Review(customer1, restaurant2, 3)
+review3 = Review(customer3, restaurant1, 5)
 print(restaurant1.display_reviews())
 print(restaurant2.display_reviews())
 print("...............................")
+customer1.add_review(restaurant1, 7)
+customer2.add_review(restaurant2, 9)
+customer3.add_review(restaurant1, 4)
+customer1.add_review(restaurant1, 8)
+
+customer1.add_review(restaurant2, 3)
+customer3.add_review(restaurant1, 5)
+print(customer1.restaurants())
+print(customer2.restaurants())
+print(customer3.restaurants())
+print('.............................')
+print(f"No of reviews for customer1 ", customer1.num_reviews())
+print(f"No of reviews for customer1 ", customer2.num_reviews())
+print(f"No of reviews for customer1 ", customer3.num_reviews())
