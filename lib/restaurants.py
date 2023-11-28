@@ -68,7 +68,9 @@ class Restaurant:
         return [f"Review for {self.name()} by {review.customer().full_name()} - Rating: {review.rating()}" for review in self._reviews]
 
     def customers(self):
-        return [review.customer() for review in self._reviews]
+        return list(set([review.customer().full_name() for review in self._reviews]))
+    
+    
     
     def average_star_rating(self):
         if not self._reviews:
@@ -116,8 +118,8 @@ class Review:
       print([(review._customer.full_name(), review._restaurant.name(), review._rating) for review in cls.reviews])
 
 
-    
-    
+
+print("....................Customer Concatenated Names ........................")   
 customer1=Customer("Angela","Mithi")
 print(customer1.full_name())
 customer2=Customer("Natasha","Koskei")
@@ -126,22 +128,37 @@ customer3=Customer("Natalie","Jerotich")
 print(customer3.full_name())
 customer4=Customer("Angela","Wangechi")
 print(customer4.full_name())
+print("....................All Customers.......................")
 Customer.show_all_customers()
-print(".................................")
+print("                                 ")
+print(".............All Restaurant Names.........................")
 restaurant1=Restaurant("Grand Regency")
 print(restaurant1.name())
 restaurant2=Restaurant("The Hilton")
 print(restaurant2.name())
-print("....................................")
+restaurant3=Restaurant("Sarova")
+print(restaurant3.name())
+print("                                 ")
+print("...................All reviews..........................")
 review1 = Review(customer1, restaurant1, 7)
 review2 = Review(customer2, restaurant2, 9)
 review3 = Review(customer3, restaurant1, 4)
 review4 = Review(customer1, restaurant1, 8)
 review5 = Review(customer1, restaurant2, 4)
-review3 = Review(customer3, restaurant1, 5)
+review6 = Review(customer3, restaurant1, 5)
+review7 = Review(customer1, restaurant3, 10)
+review8 = Review(customer3, restaurant3, 6)
+
 print(restaurant1.display_reviews())
 print(restaurant2.display_reviews())
-print("...............................")
+print(restaurant3.display_reviews())
+print("                                 ")
+print("..........Unique lists of all customers who have reviewed each restaurant..............")
+print(restaurant1.name() + f" customers:", restaurant1.customers())
+print(restaurant2.name() + f" customers:",restaurant2.customers())
+print(restaurant3.name() + f" customers:",restaurant3.customers())
+print("                                 ")
+print("..............unique list of all restaurants a customer has reviewed.....................")
 customer1.add_review(restaurant1, 7)
 customer2.add_review(restaurant2, 9)
 customer3.add_review(restaurant1, 4)
@@ -149,22 +166,26 @@ customer1.add_review(restaurant1, 8)
 
 customer1.add_review(restaurant2, 3)
 customer3.add_review(restaurant1, 10)
-print(customer1.restaurants())
-print(customer2.restaurants())
-print(customer3.restaurants())
-print('.............................')
+customer1.add_review(restaurant3, 10)
+customer3.add_review(restaurant3, 6)
+
+print(f"Restaurants reviewed by customer1: ", customer1.restaurants())
+print(f"Restaurants reviewed by customer2: ", customer2.restaurants())
+print(f"Restaurants reviewed by customer3: ",customer3.restaurants())
+print("                                 ")
+print('..............No of Reviews for each customer...................')
 print(f"No of reviews for customer1 ", customer1.num_reviews())
 print(f"No of reviews for customer2 ", customer2.num_reviews())
 print(f"No of reviews for customer3 ", customer3.num_reviews())
-print("..........................")
-print(f"First Full Name that matches:", Customer.find_by_name("Angela Mithi"))
-print(f"First Full Name that matches:", Customer.find_by_name("Natasha Jebet"))
-
-print(".................................")
-print(f"All customers with given name:", Customer.find_all_by_given_name("Angela"))
-
-print(".......................")
+print("                                 ")
+print("..............Matching Names..................")
+print(f"First Full Name that matches with (Angela Mithi):", Customer.find_by_name("Angela Mithi"))
+print(f"First Full Name that matches with (Natasha Koskei):", Customer.find_by_name("Natasha Koskei"))
+print(f"All customers with given name i.e.(Angela):", Customer.find_all_by_given_name("Angela"))
+print("                                 ")
+print("................Average rating for all restaurants...................")
 print(f"Average Star Rating for Restaurant1", restaurant1.average_star_rating())
 print(f"Average Star Rating for Restaurant2", restaurant2.average_star_rating())
+print(f"Average Star Rating for Restaurant3", restaurant3.average_star_rating())
 
 
