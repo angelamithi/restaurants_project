@@ -34,7 +34,9 @@ class Customer:
         for customer in cls.customers:
             if customer.full_name()==name:
                 return customer
-        return None
+            else:
+                return None
+      
     
     @classmethod
     def find_all_by_given_name(cls, given_name):
@@ -102,4 +104,15 @@ class Review:
     def restaurant(self):
         return self._restaurant
     
-   
+customer1=Customer("Angela","Mithi")
+print(customer1.full_name())
+customer2=Customer("Natasha","Koskei")
+print(customer2.full_name())
+customer3=Customer("Natalie","Jerotich")
+print(customer3.full_name())
+Customer.show_all_customers()
+restaurant1=Restaurant("Grand Regency")
+print(restaurant1.name())
+restaurant2=Restaurant("The Hilton")
+print(restaurant2.name())
+
