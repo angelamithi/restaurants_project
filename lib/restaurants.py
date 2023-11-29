@@ -169,9 +169,10 @@ customer3.add_review(restaurant1, 10)
 customer1.add_review(restaurant3, 10)
 customer3.add_review(restaurant3, 6)
 
-print(f"Restaurants reviewed by customer1: ", customer1.restaurants())
-print(f"Restaurants reviewed by customer2: ", customer2.restaurants())
-print(f"Restaurants reviewed by customer3: ",customer3.restaurants())
+print(f"Restaurants reviewed by {customer1.full_name()}: {customer1.restaurants()}")
+print(f"Restaurants reviewed by {customer2.full_name()}: {customer2.restaurants()}")
+print(f"Restaurants reviewed by {customer3.full_name()}: {customer3.restaurants()}")
+
 print("                                 ")
 print('..............No of Reviews for each customer...................')
 print(f"No of reviews for customer1 ", customer1.num_reviews())
